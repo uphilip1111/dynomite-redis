@@ -26,14 +26,25 @@ RUN apt-get update && apt-get install -y wget \
   sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
   sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
   sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-  sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
-  wget -O dynomite.tar.gz https://github.com/Netflix/dynomite/archive/v0.6.6.tar.gz && \
-  tar xvzf dynomite.tar.gz && \
-  cd dynomite && \
-  autoreconf -fvi && \
-  ./configure --enable-debug=yes && \
-  make && \
-  src/dynomite -h
+  sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+
+RUN apt-get update && apt-get install -y \
+	autoconf \
+	build-essential \
+	dh-autoreconf \
+	git \
+	libssl-dev \
+	libtool \
+	python-software-properties \
+	redis-server \
+	tcl8.5
+#  wget -O dynomite.tar.gz https://github.com/Netflix/dynomite/archive/v0.6.6.tar.gz && \
+#  tar xvzf dynomite.tar.gz && \
+#  cd dynomite && \
+#  autoreconf -fvi && \
+#  ./configure --enable-debug=yes && \
+#  make && \
+#  src/dynomite -h
 # copy config files
 COPY ./configs/redis.service /etc/systemd/system/redis.service
 COPY ./configs/sysctl.conf /etc/sysctl.conf
