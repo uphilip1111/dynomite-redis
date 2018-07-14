@@ -4,6 +4,7 @@ HOSTNAME = dynomite
 CONTAINER = dynomite-redis
 .PHONY:all
 all:
+	@echo $$ make init
 	@echo $$ make build
 	@echo $$ make run
 	@echo $$ make clean
@@ -22,3 +23,6 @@ container:
 	@sudo docker exec -it $(CONTAINER) bash
 imgs:
 	@sudo docker images
+init:
+	@git clone git@github.com:Netflix/dynomite.git
+	@sudo docker build -t $(IMAGES)$(TAG) .
