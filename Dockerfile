@@ -28,19 +28,29 @@ RUN apt-get update && apt-get install -y wget \
   sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
   sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
-RUN apt-get update && apt-get install -y \
+ENV TZ=Asia/Taipei
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+
+RUN  apt-get update && apt-get install -y \
 	autoconf \
 	build-essential \
 	dh-autoreconf \
 	git \
 	libssl-dev \
 	libtool \
-	python-software-properties \
-	redis-server \
+	software-properties-common \
 	tcl8.5
-#  wget -O dynomite.tar.gz https://github.com/Netflix/dynomite/archive/v0.6.6.tar.gz && \
+
+COPY ./dynomite /dynomite
+
+RUN cd /dynomite && \
+    autoreconf -fvi && \
+    ./configure --enable-debug=yes && \
+    make
+#RUN  wget -O dynomite.tar.gz https://github.com/Netflix/dynomite/archive/v0.6.6.tar.gz && \
 #  tar xvzf dynomite.tar.gz && \
-#  cd dynomite && \
+#  cd dynomite-0.6.6 && \
 #  autoreconf -fvi && \
 #  ./configure --enable-debug=yes && \
 #  make && \
