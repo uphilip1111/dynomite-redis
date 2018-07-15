@@ -61,7 +61,8 @@ COPY ./configs/sysctl.conf /etc/sysctl.conf
 COPY ./configs/rc.local /etc/rc.local
 COPY ./configs/redis.4.0.2.conf /etc/redis/redis.conf
 COPY ./configs/sentinel.conf /etc/redis/sentinel.conf
-
+COPY ./redis_single.yml /redis_single.yml
+COPY ./start.sh /start.sh
 # Define mountable directories.
 VOLUME ["/data"]
 
@@ -69,7 +70,8 @@ VOLUME ["/data"]
 WORKDIR /data
 
 # Define default command.
-CMD ["redis-server", "/etc/redis/redis.conf"]
-
+#CMD ["redis-server", "/etc/redis/redis.conf"]
+#CMD ["/dynomite/src/dynomite", "-c", "/redis_single.yml"]
+CMD ["/start.sh"]
 # Expose ports.
-EXPOSE 6379 26379
+EXPOSE 6379 26379 8102
