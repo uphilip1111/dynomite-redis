@@ -5,6 +5,7 @@ dyn_o_mite:
   dyn_seeds:
   - 172.48.0.2:8101:rack1:dc:1383429731
   - 172.48.0.4:8101:rack3:dc:1383429731
+  - 172.48.0.5:8101:rack4:dc2:1383429731
   listen: 127.0.0.1:8102
   servers:
   - 127.0.0.1:6379:1
@@ -14,6 +15,6 @@ dyn_o_mite:
   recon_key_file: /dynomite/conf/recon_key.pem
   recon_iv_file: /dynomite/conf/recon_iv.pem
   data_store: 0
-  read_consistency : DC_SAFE_QUORUM
-  write_consistency : DC_SAFE_QUORUM
+  #read_consistency : DC_SAFE_QUORUM
+  #write_consistency : DC_SAFE_QUORUM
   stats_listen: 0.0.0.0:22221

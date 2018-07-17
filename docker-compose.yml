@@ -36,6 +36,18 @@ services:
         container_name: r3
         hostname: rack3
         command: /start/start3.sh
+    dc2-r4:
+        build:
+            context: ./redis-dynomite
+            dockerfile: Dockerfile
+        restart: always
+        image: "redis/dynomite:0.0.1"
+        networks:
+            app_net:
+                ipv4_address: 172.48.0.5
+        container_name: r4
+        hostname: rack4
+        command: /start/start.sh
 
 networks:
     app_net:

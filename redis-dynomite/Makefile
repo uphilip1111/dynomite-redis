@@ -1,7 +1,7 @@
 IMAGES = dynomite-redis:
 TAG = 0710
-HOSTNAME = dynomite
-CONTAINER = dynomite-redis
+HOSTNAME = rack4
+CONTAINER = dc2-r4
 .PHONY:all
 all:
 	@echo $$ make init
