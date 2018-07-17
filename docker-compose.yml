@@ -10,6 +10,7 @@ services:
             app_net:
                 ipv4_address: 172.48.0.2
         container_name: r1
+        hostname: rack1
         command: /start/start1.sh
     r2:
         build:
@@ -21,6 +22,7 @@ services:
             app_net:
                 ipv4_address: 172.48.0.3
         container_name: r2
+        hostname: rack2
         command: /start/start2.sh
     r3:
         build:
@@ -32,6 +34,7 @@ services:
             app_net:
                 ipv4_address: 172.48.0.4
         container_name: r3
+        hostname: rack3
         command: /start/start3.sh
 
 networks:

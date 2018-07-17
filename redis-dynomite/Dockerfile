@@ -74,4 +74,4 @@ WORKDIR /data
 #CMD ["/dynomite/src/dynomite", "-c", "/redis_single.yml"]
 CMD ["/start/start.sh"]
 # Expose ports.
-EXPOSE 6379 26379 8102 22221
+EXPOSE 6379 26379 8102 22221 8101
