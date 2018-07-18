@@ -7,6 +7,7 @@ all:
 	@echo $$ make r2
 	@echo $$ make r3
 	@echo $$ make r4
+	@echo $$ make rmi
 build:
 	@docker-compose build
 up:
@@ -21,3 +22,5 @@ r3:
 	@docker exec -it r3 bash
 r4:
 	@docker exec -it r4 bash
+rmi:
+	@docker rmi $(docker images | awk '{print $3}' | grep -v IMAGE)	
